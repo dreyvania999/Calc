@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:text="Назад"
+        app:layout_constraintBottom_toTopOf="@id/first"
+        app:layout_constraintEnd_toStartOf="@id/next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/next"
+        android:text="вперед"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@id/first"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/back"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
     <TextView
         android:id="@+id/first"
         android:layout_width="0dp"
@@ -13,7 +35,7 @@
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toStartOf="@id/second"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/back" />
 
     <TextView
         android:id="@+id/second"
@@ -22,7 +44,7 @@
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toStartOf="@id/result"
         app:layout_constraintStart_toEndOf="@id/first"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/back" />
 
     <TextView
         android:id="@+id/result"
@@ -31,7 +53,7 @@
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/second"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/back" />
 
     <TableLayout
         android:id="@+id/table"
@@ -166,5 +188,7 @@
         </TableRow>
 
     </TableLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

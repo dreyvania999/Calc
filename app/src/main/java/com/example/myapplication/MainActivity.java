@@ -12,34 +12,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView first;
     TextView second;
     TextView result;
-    Button zero;
-    Button one;
-    Button two;
-    Button three;
-    Button four;
-    Button five;
-    Button six;
-    Button seven;
-    Button eight;
-    Button nine;
-    Button plus;
-    Button minus;
-    Button multiply;
-    Button equals;
-    Button devide;
-    Button clear;
+    Button zero,one,two,three,four,five,six,seven,eight,nine,plus,minus,multiply,equals,devide,clear, next, back;
     float res;
     String sing;
     boolean firstNum;
+    String[] FirstNumber = new String[10],SecondNumber = new String[10],SingZn= new String[10];
+    int stc = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        back = findViewById(R.id.back);
+        next = findViewById(R.id.next);
         firstNum = true;
         sing = "";
         res =0;
+        for (int i =0; i<10;i++){
+            FirstNumber[i]="";
+            SecondNumber[i]="";
+            SingZn[i] = "+";
+        }
         first = findViewById(R.id.first);
         second = findViewById(R.id.second);
         result = findViewById(R.id.result);
@@ -60,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         devide = findViewById(R.id.devide);
         clear = findViewById(R.id.clear);
 
+        back.setOnClickListener(this);
+        next.setOnClickListener(this);
         zero.setOnClickListener(this);
         one.setOnClickListener(this);
         two.setOnClickListener(this);
@@ -107,17 +103,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int nom1;
                 int nom2;
 
-
-                if (res == 0 && first.getText().toString() =="" && second.getText().toString() ==""){
+                if (stc == -1) {
+                    stc = 10;
+                }
+                if (stc == 10) {
+                    stc = 0;
+                }
+                FirstNumber[stc] = first.getText().toString();
+                SecondNumber[stc] = second.getText().toString();
+                SingZn[stc] = sing;
+                stc++;
+                if (stc == -1) {
+                    stc = 10;
+                }
+                if (stc == 10) {
+                    stc = 0;
+                }
+                if (res == 0 && first.getText().toString() == "" && second.getText().toString() == "") {
                     result.setText("Введите числа для подсчёта");
 
-                }
-                else{
+                } else {
+
                     nom1 = Integer.valueOf(first.getText().toString());
                     nom2 = Integer.valueOf(second.getText().toString());
                     switch (sing) {
                         case "+":
-                            res = nom1 +nom2;
+                            res = nom1 + nom2;
                             break;
                         case "-":
                             res = nom1 - nom2;
@@ -137,13 +148,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 first.setText("");
                 second.setText("");
                 firstNum = true;
-                res =0;
+                res = 0;
                 break;
             case R.id.multiply:
             case R.id.plus:
             case R.id.minus:
             case R.id.devide:
-                res =0;
+                res = 0;
                 Button getsing = (Button) view;
                 if (sing == getsing.getText().toString()) {
                     firstNum = !firstNum;
@@ -151,6 +162,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     firstNum = !firstNum;
                     sing = getsing.getText().toString();
                 }
+                break;
+            case R.id.back:
+                stc--;
+                if (stc == -1) {
+                    stc = 10;
+                }
+                first.setText(FirstNumber[stc]);
+                second.setText(SecondNumber[stc]);
+                sing = SingZn[stc];
+                break;
+            case R.id.next:
+                stc++;
+                if (stc == 10) {
+                    stc = 0;
+                }
+                first.setText(FirstNumber[stc]);
+                second.setText(SecondNumber[stc]);
+                sing = SingZn[stc];
                 break;
         }
     }

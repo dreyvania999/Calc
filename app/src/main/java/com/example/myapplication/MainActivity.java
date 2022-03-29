@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         minus = findViewById(R.id.minus);
         multiply = findViewById(R.id.multiply);
         equals = findViewById(R.id.equals);
-        devide = findViewById(R.id.devide);
+        devide = findViewById(R.id.divide);
         clear = findViewById(R.id.clear);
 
         back.setOnClickListener(this);
@@ -147,13 +147,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.clear:
                 first.setText("");
                 second.setText("");
+                result.setText("");
                 firstNum = true;
                 res = 0;
                 break;
             case R.id.multiply:
             case R.id.plus:
             case R.id.minus:
-            case R.id.devide:
+            case R.id.divide:
                 res = 0;
                 Button getsing = (Button) view;
                 if (sing == getsing.getText().toString()) {

@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView first;
     TextView second;
     TextView result;
-    Button zero,one,two,three,four,five,six,seven,eight,nine,plus,minus,multiply,equals,devide,clear, next,nextPage , back;
+    Button zero,one,two,three,four,five,six,seven,eight,nine,Sqrt,Pow,Cosinus,equals,Sinus,clear, next,nextPage, back;
     float res;
     String sing;
     boolean firstNum;
@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_second);
         back = findViewById(R.id.back);
         next = findViewById(R.id.next);
         firstNum = true;
@@ -49,11 +48,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seven = findViewById(R.id.seven);
         eight = findViewById(R.id.eight);
         nine = findViewById(R.id.nine);
-        plus = findViewById(R.id.plus);
-        minus = findViewById(R.id.minus);
-        multiply = findViewById(R.id.multiply);
+        Sqrt = findViewById(R.id.Sqrt);
+        Sinus = findViewById(R.id.Sinus);
+        Cosinus = findViewById(R.id.Cosinus);
         equals = findViewById(R.id.equals);
-        devide = findViewById(R.id.divide);
+        Pow = findViewById(R.id.Pow);
         clear = findViewById(R.id.clear);
 
         back.setOnClickListener(this);
@@ -68,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seven.setOnClickListener(this);
         eight.setOnClickListener(this);
         nine.setOnClickListener(this);
-        devide.setOnClickListener(this);
-        minus.setOnClickListener(this);
-        plus.setOnClickListener(this);
+        Sqrt.setOnClickListener(this);
+        Pow.setOnClickListener(this);
+        Cosinus.setOnClickListener(this);
         equals.setOnClickListener(this);
-        multiply.setOnClickListener(this);
+        Sinus.setOnClickListener(this);
         clear.setOnClickListener(this);
         nextPage.setOnClickListener(this);
     }
@@ -130,17 +129,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     nom1 = Integer.valueOf(first.getText().toString());
                     nom2 = Integer.valueOf(second.getText().toString());
                     switch (sing) {
-                        case "+":
-                            res = nom1 + nom2;
+                        case "POW":
+                            res = (float) Math.pow(nom1,nom2);
                             break;
-                        case "-":
-                            res = nom1 - nom2;
+                        case "SQRT":
+                            res = (float) Math.pow(nom1,1/nom2);
                             break;
-                        case "x":
-                            res = nom1 * nom2;
+                        case "SIN":
+                            res = (float) Math.sin(nom1);
                             break;
-                        case "/":
-                            res = nom1 / nom2;
+                        case "COS":
+                            res = (float) Math.cos(nom1);
                             break;
                     }
                     result.setText(String.valueOf(res));
@@ -154,10 +153,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 firstNum = true;
                 res = 0;
                 break;
-            case R.id.multiply:
-            case R.id.plus:
-            case R.id.minus:
-            case R.id.divide:
+            case R.id.Pow:
+            case R.id.Sqrt:
                 res = 0;
                 Button getsing = (Button) view;
                 if (sing == getsing.getText().toString()) {
@@ -166,6 +163,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     firstNum = !firstNum;
                     sing = getsing.getText().toString();
                 }
+                break;
+            case R.id.Sinus:
+            case R.id.Cosinus:
+                res = 0;
+                Button ygl = (Button) view;
+                sing = ygl.getText().toString();
                 break;
             case R.id.back:
                 stc--;
@@ -186,9 +189,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sing = SingZn[stc];
                 break;
             case  R.id.nextPage:
-                Intent intent = new Intent(this,SecondActivity.class);
+                Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 break;
         }
     }
-}
+    }

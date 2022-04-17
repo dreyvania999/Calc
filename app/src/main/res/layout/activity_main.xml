@@ -8,36 +8,26 @@
     tools:context=".MainActivity">
 
 
-    <Button
-        android:id="@+id/back"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:text="Назад"
-        app:layout_constraintBottom_toTopOf="@id/first"
-        app:layout_constraintEnd_toStartOf="@id/next"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/nextPage"
-        android:layout_width="10dp"
-        android:layout_height="40dp"
-        android:text="Назад"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table"
-        />
 
     <Button
-        android:id="@+id/next"
-        android:text="Вперед"
-        android:layout_width="0dp"
+        android:id="@+id/nextPage"
+        android:layout_width="100dp"
         android:layout_height="40dp"
-        app:layout_constraintBottom_toTopOf="@id/first"
+        android:text="@string/Back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/back"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/table"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/first"
@@ -46,28 +36,27 @@
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toStartOf="@id/second"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/back"
         android:textSize="24sp"/>
 
     <TextView
         android:id="@+id/second"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toStartOf="@id/result"
         app:layout_constraintStart_toEndOf="@id/first"
-        app:layout_constraintTop_toTopOf="@id/back"
-        android:textSize="24sp"/>
+        app:layout_constraintTop_toBottomOf="@id/spinner" />
 
     <TextView
         android:id="@+id/result"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/table"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/second"
-        app:layout_constraintTop_toTopOf="@id/back"
-        android:textSize="24sp"/>
+       />
 
     <TableLayout
         android:id="@+id/table"

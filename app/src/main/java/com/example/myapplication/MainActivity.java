@@ -5,19 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     TextView first;
     TextView second;
     TextView result;
-    Button zero,one,two,three,four,five,six,seven,eight,nine,plus,minus,multiply,equals,devide,clear, next,nextPage , back;
-    float res;
+    Spinner spinner;
+    Button zero, one, two, three, four, five, six, seven, eight, nine, plus, minus, multiply, equals, devide, clear, nextPage;
+    double res;
     String sing;
     boolean firstNum;
-    String[] FirstNumber = new String[10],SecondNumber = new String[10],SingZn= new String[10];
+    String[] FirstNumber = new String[10], SecondNumber = new String[10], SingZn = new String[10], str = new String[10];
     int stc = 0;
 
     @Override
@@ -25,16 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        back = findViewById(R.id.back);
-        next = findViewById(R.id.next);
         firstNum = true;
         sing = "";
-        res =0;
-        for (int i =0; i<10;i++){
-            FirstNumber[i]="";
-            SecondNumber[i]="";
+        res = 0.0;
+        for (int i = 0; i < 10; i++) {
+            FirstNumber[i] = "";
+            SecondNumber[i] = "";
+            str[i] = "";
             SingZn[i] = "+";
         }
+        spinner = findViewById(R.id.spinner);
+
         nextPage = findViewById(R.id.nextPage);
         first = findViewById(R.id.first);
         second = findViewById(R.id.second);
@@ -55,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         equals = findViewById(R.id.equals);
         devide = findViewById(R.id.divide);
         clear = findViewById(R.id.clear);
-
-        back.setOnClickListener(this);
-        next.setOnClickListener(this);
         zero.setOnClickListener(this);
         one.setOnClickListener(this);
         two.setOnClickListener(this);
@@ -75,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         multiply.setOnClickListener(this);
         clear.setOnClickListener(this);
         nextPage.setOnClickListener(this);
+        spinner.setOnItemSelectedListener(this);
+        spinner.setPrompt("Title");
+
     }
 
     @Override
@@ -115,14 +120,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FirstNumber[stc] = first.getText().toString();
                 SecondNumber[stc] = second.getText().toString();
                 SingZn[stc] = sing;
+                String[] s =new String[10];
+                int i;
+                for (i =0;i<10;i++) {
+                    s[i] =str[i] ;
+                }
+                for (i =0;i<9;i++) {
+                    str[i+1] = s[i];
+                }
+                str[0] = FirstNumber[stc] + " " + SingZn[stc] + " " + SecondNumber[stc];
                 stc++;
+                ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, str);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
                 if (stc == -1) {
                     stc = 10;
                 }
                 if (stc == 10) {
                     stc = 0;
                 }
-                if (res == 0 && first.getText().toString() == "" && second.getText().toString() == "") {
+                if (res == 0 && first.getText().toString().equals("") && second.getText().toString().equals("")) {
                     result.setText("Введите числа для подсчёта");
 
                 } else {
@@ -136,14 +153,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case "-":
                             res = nom1 - nom2;
                             break;
-                        case "x":
+                        case "*":
                             res = nom1 * nom2;
                             break;
                         case "/":
-                            res = nom1 / nom2;
+                            res = (double) nom1/nom2;
                             break;
                     }
-                    result.setText(String.valueOf(res));
+                    result.setText(" " +res);
                 }
 
                 break;
@@ -160,35 +177,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.divide:
                 res = 0;
                 Button getsing = (Button) view;
-                if (sing == getsing.getText().toString()) {
+                if (sing.equals(getsing.getText().toString())) {
                     firstNum = !firstNum;
                 } else {
                     firstNum = !firstNum;
                     sing = getsing.getText().toString();
                 }
                 break;
-            case R.id.back:
-                stc--;
-                if (stc == -1) {
-                    stc = 10;
-                }
-                first.setText(FirstNumber[stc]);
-                second.setText(SecondNumber[stc]);
-                sing = SingZn[stc];
-                break;
-            case R.id.next:
-                stc++;
-                if (stc == 10) {
-                    stc = 0;
-                }
-                first.setText(FirstNumber[stc]);
-                second.setText(SecondNumber[stc]);
-                sing = SingZn[stc];
-                break;
-            case  R.id.nextPage:
-                Intent intent = new Intent(this,SecondActivity.class);
+
+            case R.id.nextPage:
+                Intent intent = new Intent(this, SecondActivity.class);
                 startActivity(intent);
                 break;
         }
+
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+        String item = (String) parent.getSelectedItem();
+        String[] s = item.split(" ");
+        first.setText(s[0]);
+        second.setText(s[2]);
+        sing = s[1];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

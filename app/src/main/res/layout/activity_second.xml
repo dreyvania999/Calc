@@ -8,20 +8,21 @@
 
     <Button
         android:id="@+id/nextPage"
-        android:layout_width="10dp"
+        android:layout_width="100dp"
         android:layout_height="40dp"
-        android:text="Назад"
+        android:text="@string/Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/table"
-        />
+        app:layout_constraintVertical_bias="1.0" />
 
-        <Button
+    <Button
             android:id="@+id/back"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:text="Назад"
+            android:text="@string/Back"
             app:layout_constraintBottom_toTopOf="@id/first"
             app:layout_constraintEnd_toStartOf="@id/next"
             app:layout_constraintStart_toStartOf="parent"

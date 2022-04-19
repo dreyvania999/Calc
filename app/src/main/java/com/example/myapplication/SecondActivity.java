@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
@@ -13,6 +14,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     TextView first;
     TextView second;
     TextView result;
+    Spinner spinner;
     Button zero,one,two,three,four,five,six,seven,eight,nine,Sqrt,Pow,Cosinus,equals,Sinus,clear, next,nextPage, back;
     float res;
     String sing;
@@ -24,8 +26,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        back = findViewById(R.id.back);
-        next = findViewById(R.id.next);
+
         firstNum = true;
         sing = "";
         res =0;
@@ -34,6 +35,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             SecondNumber[i]="";
             SingZn[i] = "+";
         }
+        spinner = findViewById(R.id.spinner);
         nextPage = findViewById(R.id.nextPage);
         first = findViewById(R.id.first);
         second = findViewById(R.id.second);
@@ -55,8 +57,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         Pow = findViewById(R.id.Pow);
         clear = findViewById(R.id.clear);
 
-        back.setOnClickListener(this);
-        next.setOnClickListener(this);
+
         zero.setOnClickListener(this);
         one.setOnClickListener(this);
         two.setOnClickListener(this);
@@ -170,24 +171,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 Button ygl = (Button) view;
                 sing = ygl.getText().toString();
                 break;
-            case R.id.back:
-                stc--;
-                if (stc == -1) {
-                    stc = 10;
-                }
-                first.setText(FirstNumber[stc]);
-                second.setText(SecondNumber[stc]);
-                sing = SingZn[stc];
-                break;
-            case R.id.next:
-                stc++;
-                if (stc == 10) {
-                    stc = 0;
-                }
-                first.setText(FirstNumber[stc]);
-                second.setText(SecondNumber[stc]);
-                sing = SingZn[stc];
-                break;
+
             case  R.id.nextPage:
                 Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);

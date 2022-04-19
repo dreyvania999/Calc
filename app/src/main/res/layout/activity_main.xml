@@ -27,7 +27,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/table"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:background="@drawable/style_next_page"/>
 
     <TextView
         android:id="@+id/first"
@@ -62,7 +63,7 @@
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/nextPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/second">
@@ -231,7 +232,9 @@
                 android:insetBottom="0dp"
                 android:text="="
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+
+                />
 
             <android.widget.Button
                 android:id="@+id/zero"
@@ -242,7 +245,9 @@
                 android:insetBottom="0dp"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+
+                />
 
             <android.widget.Button
                 android:id="@+id/clear"
@@ -253,7 +258,9 @@
                 android:insetBottom="0dp"
                 android:text="C"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+
+                />
 
             <android.widget.Button
                 android:id="@+id/divide"
@@ -264,7 +271,8 @@
                 android:insetBottom="0dp"
                 android:text="/"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                />
 
         </TableRow>
     </TableLayout>

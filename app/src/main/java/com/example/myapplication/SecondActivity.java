@@ -17,28 +17,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     TextView second;
     TextView result;
     Spinner spinner;
-    Button zero;
-    Button one;
-    Button two;
-    Button three;
-    Button four;
-    Button five;
-    Button six;
-    Button seven;
-    Button eight;
-    Button nine;
-    Button Sqrt;
-    Button Pow;
-    Button Cosinus;
-    Button equals;
-    Button Sinus;
-    Button clear;
-    Button nextPage;
-    float res;
+    Button zero, one, two, three, four, five, six, seven, eight, nine, Sqrt, Pow, Cosinus, equals, Sinus, clear, nextPage;
+    double res;
     String sing;
     boolean firstNum;
-    String[] FirstNumber = new String[10], SecondNumber = new String[10], SingZn = new String[10], str = new String[10];
-    int stc = 0;
+    String[] stc = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +32,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         sing = "";
         res = 0;
         for (int i = 0; i < 10; i++) {
-            FirstNumber[i] = "";
-            SecondNumber[i] = "";
-            SingZn[i] = "+";
+            stc[i]=" ";
         }
 
         spinner = findViewById(R.id.spinner);
@@ -127,57 +108,45 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 int nom1;
                 int nom2;
 
-                if (stc == -1) {
-                    stc = 10;
-                }
-                if (stc == 10) {
-                    stc = 0;
-                }
-                FirstNumber[stc] = first.getText().toString();
-                SecondNumber[stc] = second.getText().toString();
-                SingZn[stc] = sing;
+
                 String[] s = new String[10];
                 int i;
                 for (i = 0; i < 10; i++) {
-                    s[i] = str[i];
+                    s[i] = stc[i];
                 }
                 for (i = 0; i < 9; i++) {
-                    str[i + 1] = s[i];
+                    stc[i + 1] = s[i];
                 }
-                str[0] = FirstNumber[stc] + " " + SingZn[stc] + " " + SecondNumber[stc];
-                stc++;
-                ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, str);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-                if (stc == -1) {
-                    stc = 10;
-                }
-                if (stc == 10) {
-                    stc = 0;
-                }
+
+
                 if (res == 0 && first.getText().toString().equals("") && second.getText().toString().equals("")) {
                     result.setText("Введите числа для подсчёта");
 
                 } else {
 
                     nom1 = Integer.parseInt(first.getText().toString());
-                    nom2 = Integer.parseInt(second.getText().toString());
+
                     switch (sing) {
                         case "POW":
-                            res = (float) Math.pow(nom1, nom2);
+                            nom2 = Integer.parseInt(second.getText().toString());
+                            res = Math.pow(nom1, nom2);
                             break;
                         case "SQRT":
-                            res = (float) Math.pow(nom1, 1 / nom2);
+                            nom2 = Integer.parseInt(second.getText().toString());
+                            res = Math.pow(nom1, 1 / nom2);
                             break;
                         case "SIN":
-                            res = (float) Math.sin(Double.valueOf(nom1));
+                            res = Math.sin(nom1);
                             break;
                         case "COS":
-                            res = (float) Math.cos(Double.valueOf(nom1));
+                            res = Math.cos(nom1);
                             break;
                     }
-                    result.setText(String.valueOf(res));
-                }
+                    result.setText(" " +res);
+                    stc[0] = first.getText().toString() + " " + sing + " " + second.getText().toString() + " = "+ res;
+                    ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, stc);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);                }
 
                 break;
             case R.id.clear:
@@ -219,7 +188,12 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         String item = (String) parent.getSelectedItem();
         String[] s = item.split(" ");
         first.setText(s[0]);
-        second.setText(s[2]);
+        if (s.length>=5) {
+            second.setText(s[2]);
+        }
+        else {
+            second.setText(" ");
+        }
         sing = s[1];
     }
 

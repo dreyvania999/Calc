@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     double res;
     String sing;
     boolean firstNum;
-    String[] FirstNumber = new String[10], SecondNumber = new String[10], SingZn = new String[10], str = new String[10];
-    int stc = 0;
+    String[]  str = new String[10];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sing = "";
         res = 0.0;
         for (int i = 0; i < 10; i++) {
-            FirstNumber[i] = "";
-            SecondNumber[i] = "";
             str[i] = "";
-            SingZn[i] = "+";
         }
         spinner = findViewById(R.id.spinner);
 
@@ -111,15 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int nom1;
                 int nom2;
 
-                if (stc == -1) {
-                    stc = 10;
-                }
-                if (stc == 10) {
-                    stc = 0;
-                }
-                FirstNumber[stc] = first.getText().toString();
-                SecondNumber[stc] = second.getText().toString();
-                SingZn[stc] = sing;
                 String[] s =new String[10];
                 int i;
                 for (i =0;i<10;i++) {
@@ -128,17 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for (i =0;i<9;i++) {
                     str[i+1] = s[i];
                 }
-                str[0] = FirstNumber[stc] + " " + SingZn[stc] + " " + SecondNumber[stc];
-                stc++;
-                ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, str);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-                if (stc == -1) {
-                    stc = 10;
-                }
-                if (stc == 10) {
-                    stc = 0;
-                }
+
                 if (res == 0 && first.getText().toString().equals("") && second.getText().toString().equals("")) {
                     result.setText("Введите числа для подсчёта");
 
@@ -161,6 +139,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             break;
                     }
                     result.setText(" " +res);
+                    str[0] = first.getText().toString() + " " + sing + " " + second.getText().toString() + " = "+ res;
+                    ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, str);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+
                 }
 
                 break;
